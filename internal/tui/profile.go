@@ -196,20 +196,23 @@ func (m model) viewProfile(p theme.Palette) string {
 
 	title := val.Render("_toofan")
 
-	fullWidth := 86
-	if m.width > 0 && m.width < 92 {
-		fullWidth = m.width - 6
-	}
-	paneWidth := (fullWidth - 4) / 3 // 2 gaps of 2 char each
+	
+		fullWidth := m.width
+        if fullWidth > 100 {
+            fullWidth = 100
+	    }
+	
+	paneWidth := (fullWidth - 8) / 3 // 2 gaps of 2 char each
 
 	paneStyle := lipgloss.NewStyle().
 		Border(lipgloss.RoundedBorder()).
 		BorderForeground(p.Foreground).
 		Padding(1, 2)
+	    Height(12)
 
-	innerWidth := paneWidth - 6
-	if innerWidth < 20 {
-		innerWidth = 20
+	innerWidth := paneWidth - 4
+	if innerWidth < 15 {
+		innerWidth = 15
 	}
 
 	hours := int(m.prof.Time.Hours())
